@@ -10,7 +10,6 @@
     - update the documentation below and add it to the project source as `api-doc.md`
     - also update the application to support subtasks
 
-- Contact me at tom@avocode.com if there you have any question
 
 # API Documentation
 
@@ -26,7 +25,7 @@ Returns a list of tasks.
 < 200 OK
 {
   tasks: Task[] = [
-    { id: number, label: string, completed: boolean }
+    { id: number, label: string, completed: boolean, parent: int, subTasks: int[] }
   ]
 }
 ```
@@ -37,28 +36,39 @@ Creates a new task.
 
 ```
 > POST /tasks
-{ label: string }
+{ label: string, parentTaskID: string }
 
 < 201 Created
 {
-  task: { id: number, label: string, completed: boolean }
+  task: { id: number, label: string, completed: boolean, parent: int, subTasks: int[] }
+}
+
+< 400 Bad Request
+{
+  error: string
 }
 ```
 
-### `POST /tasks/:id`
+### `PUT /tasks/:id`
 
 Updates the task of the given ID.
 
 ```
-> POST /tasks/:id
+> PUT /tasks/:id
 { label: string } |
 { completed: boolean } |
-{ label: string, completed: boolean }
+{ label: string, completed: boolean } |
+{ label: string, parentTaskID: string } |
+{ completed: boolean, parentTaskID: string } |
+{ label: string, completed: boolean, parentTaskID: string }
 
 < 200 OK
 {
-  task: Task = { id: number, label: string, completed: boolean }
+  task: Task = { id: number, label: string, completed: boolean, parent: int, subTasks: int[] }
 }
+
+< 400 Bad Request
+{ error: string }
 
 < 404 Not Found
 { error: string }
