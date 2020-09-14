@@ -12,7 +12,7 @@ Returns a list of tasks.
 < 200 OK
 {
   tasks: Task[] = [
-    { id: number, label: string, completed: boolean, parent: int, subTasks: int[] }
+    { id: number, label: string, completed: boolean, parent: integer, subTasks: integer[] }
   ]
 }
 ```
@@ -27,7 +27,7 @@ Creates a new task.
 
 < 201 Created
 {
-  task: { id: number, label: string, completed: boolean, parent: int, subTasks: int[] }
+  task: { id: number, label: string, completed: boolean, parent: integer, subTasks: integer[] }
 }
 
 < 400 Bad Request
@@ -51,7 +51,7 @@ Updates the task of the given ID.
 
 < 200 OK
 {
-  task: Task = { id: number, label: string, completed: boolean, parent: int, subTasks: int[] }
+  task: Task = { id: number, label: string, completed: boolean, parent: integer, subTasks: integer[] }
 }
 
 < 400 Bad Request
